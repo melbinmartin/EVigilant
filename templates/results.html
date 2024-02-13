@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Scanner Results</title>
+</head>
+<body>
+    <h1>Email Scanner Results</h1>
+
+    <h2>Emails</h2>
+    <ul>
+        {% for email in emails %}
+            <li>
+                <strong>Sender:</strong> {{ email.sender }}<br>
+                <strong>Subject:</strong> {{ email.subject }}<br>
+                <strong>Body:</strong> {{ email.body }}<br><br>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Scanned Links</h2>
+    <ul>
+        {% for result in link_results %}
+            <li>
+                <strong>URL:</strong> {{ result.url }}<br>
+                <strong>Scan Result:</strong> {{ result.result }}<br><br>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>File Report</h2>
+    {% if file_hash %}
+        <p>
+            <strong>File Hash:</strong> {{ file_hash }}<br>
+            {% if file_result %}
+                <strong>Scan Result:</strong> {{ file_result.result }}<br><br>
+            {% else %}
+                <strong>No result available for the file.</strong><br><br>
+            {% endif %}
+        </p>
+    {% else %}
+        <strong>No file hash provided for scanning.</strong><br><br>
+    {% endif %}
+</body>
+</html>

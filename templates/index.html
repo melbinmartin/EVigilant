@@ -1,0 +1,201 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InboxSecure </title>
+</head>
+<body>
+    <h1>InboxSecure </h1>
+    {% for email in email_details %}
+    <div>
+        <p><strong>Sender:</strong> {{ email.sender }}</p>
+        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
+        <p><strong>Subject:</strong> {{ email.subject }}</p>
+        <p><strong>Body:</strong></p>
+        <p>{{ email.body }}</p>
+        {% if email.attachments %}
+        <p><strong>Attachments:</strong></p>
+        <ul>
+            {% for attachment in email.attachments %}
+            <li>{{ attachment.filename }} - 
+                {% if attachment.scan_result.response_code == 1 %}
+                    {% if attachment.scan_result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p><strong>URL Scan Results:</strong></p>
+        <ul>
+            {% for url, result in email.url_scan_results %}
+            <li>{{ url }} - 
+                {% if result.response_code == 1 %}
+                    {% if result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html> -->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InboxSecure</title>
+</head>
+<body>
+    <h1>InboxSecure</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% for email in email_details %}
+    <div>
+        <p><strong>Sender:</strong> {{ email.sender }}</p>
+        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
+        <p><strong>Subject:</strong> {{ email.subject }}</p>
+        <p><strong>Body:</strong></p>
+        <p>{{ email.body }}</p>
+        {% if email.attachments %}
+        <p><strong>Attachments:</strong></p>
+        <ul>
+            {% for attachment in email.attachments %}
+            <li>{{ attachment.filename }} - 
+                {% if attachment.scan_result.response_code == 1 %}
+                    {% if attachment.scan_result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p><strong>URL Scan Results:</strong></p>
+        <ul>
+            {% for url, result in email.url_scan_results %}
+            <li>{{ url }} - 
+                {% if result.response_code == 1 %}
+                    {% if result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InboxSecure</title>
+    <style>
+        .counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>InboxSecure</h1>
+    <div class="counter">
+        Total Scanned: {{ total_scanned }}
+        <br>
+        Total Malicious: {{ total_malicious }}
+        <br>
+        Total Safe: {{ total_safe }}
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% for email in email_details %}
+    <div>
+        <p><strong>Sender:</strong> {{ email.sender }}</p>
+        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
+        <p><strong>Subject:</strong> {{ email.subject }}</p>
+        <p><strong>Body:</strong></p>
+        <p>{{ email.body }}</p>
+        {% if email.attachments %}
+        <p><strong>Attachments:</strong></p>
+        <ul>
+            {% for attachment in email.attachments %}
+            <li>{{ attachment.filename }} - 
+                {% if attachment.scan_result.response_code == 1 %}
+                    {% if attachment.scan_result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p><strong>URL Scan Results:</strong></p>
+        <ul>
+            {% for url, result in email.url_scan_results %}
+            <li>{{ url }} - 
+                {% if result.response_code == 1 %}
+                    {% if result.positives == 0 %}
+                        <span style="color: green;">Not malicious</span>
+                    {% else %}
+                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
+                    {% endif %}
+                {% else %}
+                    <span style="color: orange;">Not scanned</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html>

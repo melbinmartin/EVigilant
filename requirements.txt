@@ -1,6 +1,5 @@
 Flask
 imap-tools
 requests
-hashlib
 os
 

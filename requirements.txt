@@ -1,0 +1,6 @@
+Flask
+imaplib
+email
+requests
+hashlib
+os

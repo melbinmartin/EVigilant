@@ -137,13 +137,14 @@
     <div class="header column-center">
         <h3 style="margin-bottom: 5px;">Overview</h3>
         <div class="counter">
-            <div class="first-card" style="background-color: #e5f6f6;">
+            <div class="first-card" style="background-color: #e5f6f6; width: 300px;">
                 <span>Connected Account:</span>
+                <p style="font-weight: 400;">somelife48@gmail.com</p>
                 <!-- <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" style="height: 40px;" /> -->
             </div>
             <div class="first-card" style="background-color: #e5f6f6;">
                 <span>Total Scanned: {{ total_scanned }}</span>
-                <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" style="height: 40px;" />
+                <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" />
             </div>
             <div class="first-card" style="background-color: #e1daf9;">
                 <span>Total Malicious: {{ total_malicious }}</span>

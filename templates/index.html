@@ -1,201 +1,210 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InboxSecure </title>
-</head>
-<body>
-    <h1>InboxSecure </h1>
-    {% for email in email_details %}
-    <div>
-        <p><strong>Sender:</strong> {{ email.sender }}</p>
-        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
-        <p><strong>Subject:</strong> {{ email.subject }}</p>
-        <p><strong>Body:</strong></p>
-        <p>{{ email.body }}</p>
-        {% if email.attachments %}
-        <p><strong>Attachments:</strong></p>
-        <ul>
-            {% for attachment in email.attachments %}
-            <li>{{ attachment.filename }} - 
-                {% if attachment.scan_result.response_code == 1 %}
-                    {% if attachment.scan_result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <p><strong>URL Scan Results:</strong></p>
-        <ul>
-            {% for url, result in email.url_scan_results %}
-            <li>{{ url }} - 
-                {% if result.response_code == 1 %}
-                    {% if result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endfor %}
-</body>
-</html> -->
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InboxSecure</title>
-</head>
-<body>
-    <h1>InboxSecure</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div>
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-    {% for email in email_details %}
-    <div>
-        <p><strong>Sender:</strong> {{ email.sender }}</p>
-        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
-        <p><strong>Subject:</strong> {{ email.subject }}</p>
-        <p><strong>Body:</strong></p>
-        <p>{{ email.body }}</p>
-        {% if email.attachments %}
-        <p><strong>Attachments:</strong></p>
-        <ul>
-            {% for attachment in email.attachments %}
-            <li>{{ attachment.filename }} - 
-                {% if attachment.scan_result.response_code == 1 %}
-                    {% if attachment.scan_result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <p><strong>URL Scan Results:</strong></p>
-        <ul>
-            {% for url, result in email.url_scan_results %}
-            <li>{{ url }} - 
-                {% if result.response_code == 1 %}
-                    {% if result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endfor %}
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>InboxSecure</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f3f2f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 100vh;
+            overflow-y: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #0b0b0b;
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar img {
+            height: 35px;
+            margin: 10px;
+        }
+
+        .navbar a {
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            margin: 5px;
+        }
+
+        .header {
+            height: 80%;
+            width: 80%;
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .column-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .counter {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .first-card {
+            height: 170px;
+            width: 170px;
+            background-color: #e5f6f6;
+            margin: 5px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .first-card img {
+            height: 50px;
+            margin: 10px;
+        }
+
+        .second-card {
+            width: 100%;
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            max-height: calc(100vh - 400px);
+            /* Set maximum height for the table */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            /* height: 50px; Remove fixed height */
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #6748e3;
+            color: white;
+            border: 0;
         }
     </style>
 </head>
+
 <body>
-    <h1>InboxSecure</h1>
-    <div class="counter">
-        Total Scanned: {{ total_scanned }}
-        <br>
-        Total Malicious: {{ total_malicious }}
-        <br>
-        Total Safe: {{ total_safe }}
+    <div class="navbar">
+        <div style="display: flex; flex-direction: row; align-items: center;
+        justify-content: center;">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" />
+            <h3>InboxSecure</h3>
+        </div>
+        <div>
+            <a href="#">Home</a>
+            <a href="#" style="color: #0fb7ff;">Dashboard</a>
+            <a href="#" class="phcheck">Free URL Checker</a>
+        </div>
     </div>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
+
+    <div class="header column-center">
+        <h3 style="margin-bottom: 5px;">Overview</h3>
+        <div class="counter">
+            <div class="first-card" style="background-color: #e5f6f6;">
+                <span>Connected Account:</span>
+                <!-- <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" style="height: 40px;" /> -->
+            </div>
+            <div class="first-card" style="background-color: #e5f6f6;">
+                <span>Total Scanned: {{ total_scanned }}</span>
+                <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" style="height: 40px;" />
+            </div>
+            <div class="first-card" style="background-color: #e1daf9;">
+                <span>Total Malicious: {{ total_malicious }}</span>
+                <img src="{{ url_for('static', filename='Malicious.png') }}" alt="Malicious" />
+            </div>
+            <div class="first-card" style="background-color: #e0efff;">
+                <span>Total Safe: {{ total_safe }}</span>
+                <img src="{{ url_for('static', filename='Safe.png') }}" alt="Safe" />
+            </div>
+        </div>
+
+        <div class="second-card">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
             <div>
                 {% for message in messages %}
-                    <p>{{ message }}</p>
+                <p>{{ message }}</p>
                 {% endfor %}
             </div>
-        {% endif %}
-    {% endwith %}
-    {% for email in email_details %}
-    <div>
-        <p><strong>Sender:</strong> {{ email.sender }}</p>
-        <p><strong>Receiver:</strong> {{ email.receiver }}</p>
-        <p><strong>Subject:</strong> {{ email.subject }}</p>
-        <p><strong>Body:</strong></p>
-        <p>{{ email.body }}</p>
-        {% if email.attachments %}
-        <p><strong>Attachments:</strong></p>
-        <ul>
-            {% for attachment in email.attachments %}
-            <li>{{ attachment.filename }} - 
-                {% if attachment.scan_result.response_code == 1 %}
-                    {% if attachment.scan_result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ attachment.scan_result.positives }}/{{ attachment.scan_result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <p><strong>URL Scan Results:</strong></p>
-        <ul>
-            {% for url, result in email.url_scan_results %}
-            <li>{{ url }} - 
-                {% if result.response_code == 1 %}
-                    {% if result.positives == 0 %}
-                        <span style="color: green;">Not malicious</span>
-                    {% else %}
-                        <span style="color: red;">Malicious ({{ result.positives }}/{{ result.total }})</span>
-                    {% endif %}
-                {% else %}
-                    <span style="color: orange;">Not scanned</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+            {% endif %}
+            {% endwith %}
+
+            <table>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Subject</th>
+                    <th>Body</th>
+                    <th>Attachments</th>
+                </tr>
+                {% for email in email_details %}
+                <tr>
+                    <td>{{ email.sender }}</td>
+                    <td>{{ email.receiver }}</td>
+                    <td>{{ email.subject }}</td>
+                    <td>{{ email.body }}</td>
+                    <td>
+                        {% if email.attachments %}
+                        <ul>
+                            {% for attachment in email.attachments %}
+                            <li>{{ attachment.filename }}
+                                {% if attachment.scan_result.response_code == 1 %}
+                                {% if attachment.scan_result.positives == 0 %}
+                                <span style="color: green;"><br/>Not malicious</span>
+                                {% else %}
+                                <span style="color: red;"><br/>Malicious ({{ attachment.scan_result.positives }}/{{
+                                    attachment.scan_result.total }})</span>
+                                {% endif %}
+                                {% else %}
+                                <span style="color: orange;"><br/>Not scanned</span>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
-    {% endfor %}
 </body>
+
 </html>

@@ -147,7 +147,7 @@ def fetch_emails():
 
     status, messages = imap.search(None, 'ALL')
     messages = messages[0].split()
-
+    
     for message_id in messages:
         _, msg = imap.fetch(message_id, '(RFC822)')
         email_message = email.message_from_bytes(msg[0][1])

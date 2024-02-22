@@ -276,4 +276,4 @@ def index():
     return render_template('index.html', email_details=email_details, total_scanned=total_scanned, total_malicious=total_malicious, total_safe=total_safe)
 
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0')
+    app.run(debug=False,host='0.0.0.0',port=8080)

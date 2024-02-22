@@ -1,0 +1,118 @@
+{
+  "workspace_id": "your_workspace_id",
+  "intents": [
+    {
+      "intent": "MenstrualCycle",
+      "examples": [
+        "Menstrual cycle",
+        "Periods",
+        "Menstruation"
+      ]
+    },
+    {
+      "intent": "CancerRelatedIssues",
+      "examples": [
+        "Cancer symptoms",
+        "Cancer prevention",
+        "Cancer treatment"
+      ]
+    },
+    {
+      "intent": "PregnancyIssues",
+      "examples": [
+        "Pregnancy symptoms",
+        "Maternity care",
+        "Prenatal health"
+      ]
+    },
+    {
+      "intent": "SexualProblems",
+      "examples": [
+        "Sexual health",
+        "Intimacy issues",
+        "Sexual dysfunction"
+      ]
+    },
+    {
+      "intent": "MentalHealth",
+      "examples": [
+        "Anxiety",
+        "Depression",
+        "Mood swings",
+        "PMDD"
+      ]
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "dialog_node": "start",
+      "conditions": "#MenstrualCycle",
+      "output": {
+        "text": "Let's talk about menstrual cycles. How can I assist you today?"
+      }
+    },
+    {
+      "dialog_node": "menstrualCycleInfo",
+      "conditions": "#MenstrualCycle",
+      "output": {
+        "text": "The menstrual cycle typically lasts about 28 days. If you have specific questions, feel free to ask."
+      }
+    },
+    {
+      "dialog_node": "start",
+      "conditions": "#CancerRelatedIssues",
+      "output": {
+        "text": "Concerned about cancer? I'm here to help. What information are you looking for?"
+      }
+    },
+    {
+      "dialog_node": "cancerInfo",
+      "conditions": "#CancerRelatedIssues",
+      "output": {
+        "text": "Cancer can manifest in various ways. It's important to be aware of symptoms and seek medical advice if needed."
+      }
+    },
+    {
+      "dialog_node": "start",
+      "conditions": "#PregnancyIssues",
+      "output": {
+        "text": "Congratulations or concerned about pregnancy? How can I support you today?"
+      }
+    },
+    {
+      "dialog_node": "pregnancyInfo",
+      "conditions": "#PregnancyIssues",
+      "output": {
+        "text": "Pregnancy is a unique journey. If you have questions or need advice, feel free to ask."
+      }
+    },
+    {
+      "dialog_node": "start",
+      "conditions": "#SexualProblems",
+      "output": {
+        "text": "Sexual health is important. What specific concerns or questions do you have?"
+      }
+    },
+    {
+      "dialog_node": "sexualProblemsInfo",
+      "conditions": "#SexualProblems",
+      "output": {
+        "text": "Open communication and professional advice can address many sexual health concerns. How can I assist you further?"
+      }
+    },
+    {
+      "dialog_node": "start",
+      "conditions": "#MentalHealth",
+      "output": {
+        "text": "Mental health matters. How can I support you with anxiety, depression, mood swings, or PMDD?"
+      }
+    },
+    {
+      "dialog_node": "mentalHealthInfo",
+      "conditions": "#MentalHealth",
+      "output": {
+        "text": "Mental health is a priority. Seeking help and building a support network are crucial. What can I do for you today?"
+      }
+    }
+  ]
+}

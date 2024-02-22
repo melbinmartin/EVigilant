@@ -113,6 +113,7 @@ def index():
     total_scanned = 0
     total_malicious = 0
     total_safe = 0
+    removed_emails = []  # List to store removed emails
     for email_message in emails:
         sender = email_message['From']
         receiver = email_message['To']
@@ -151,9 +152,9 @@ def index():
             total_malicious += 1
             # Delete malicious email from inbox
             deleted_email_details = delete_email(email_message)
-            flash('Email removed: {}'.format(deleted_email_details))
-        total_scanned += 1
-    return render_template('index.html', email_details=email_details, total_scanned=total_scanned, total_malicious=total_malicious, total_safe=total_safe)
+            removed_emails.extend(deleted_email_details)  # Add removed emails to the list
+    total_scanned = total_safe + total_malicious  # Total scanned emails is the sum of safe and malicious
+    return render_template('index.html', email_details=email_details, total_scanned=total_scanned, total_malicious=total_malicious, total_safe=total_safe, removed_emails=removed_emails)
 
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0',port=8080)
+    app.run(debug=False,host='0.0.0.0')

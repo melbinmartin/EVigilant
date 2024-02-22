@@ -156,6 +156,28 @@
             </div>
         </div>
 
+        <!-- Display removed emails if there are any -->
+        {% if removed_emails %}
+        <div class="second-card" style="height: 500px;">
+            <h4>Email Removed:</h4>
+            <table>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Subject</th>
+                </tr>
+                {% for email in removed_emails %}
+                <tr>
+                    <td>{{ email.sender }}</td>
+                    <td>{{ email.receiver }}</td>
+                    <td>{{ email.subject }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        
+        <!-- Your main email table -->
         <div class="second-card">
             {% with messages = get_flashed_messages() %}
             {% if messages %}

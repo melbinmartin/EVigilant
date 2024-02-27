@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>EVigilant</title>
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Retrieve email parameter from the URL
+        const email = getUrlParameter('email');
+
+        // Display the retrieved email parameter
+        const emailDisplay = document.getElementById('emailDisplay');
+        emailDisplay.textContent = `Email: ${email}`;
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -137,7 +153,7 @@
         <div class="counter">
             <div class="first-card" style="background-color: #e5f6f6; width: 300px;">
                 <span>Connected Account:</span>
-                <p style="font-weight: 400;">somelife48@gmail.com</p>
+                <p id="emailDisplay" style="font-weight: 400;"></p>
                 <!-- <img src="{{ url_for('static', filename='Scan.png') }}" alt="Scan" style="height: 40px;" /> -->
             </div>
             <div class="first-card" style="background-color: #e5f6f6;">
